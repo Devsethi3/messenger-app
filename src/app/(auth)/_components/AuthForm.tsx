@@ -99,6 +99,7 @@ const AuthForm = () => {
               id="name"
               label="Name"
               register={register}
+              placeholder="Display Name"
               type="name" // Adding type
               required // Adding required
               disabled={isLoading} // Example of how you can pass disabled prop
@@ -108,6 +109,7 @@ const AuthForm = () => {
             errors={errors}
             id="email"
             label="Email"
+            placeholder="abc@gmail.com"
             register={register}
             type="email" // Adding type
             required // Adding required
@@ -117,6 +119,7 @@ const AuthForm = () => {
             errors={errors}
             id="password"
             label="Passoword"
+            placeholder="Enter Your Password"
             register={register}
             type="password" // Adding type
             required // Adding required

@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
         </div>
         <HiEllipsisHorizontal
           size={32}
-          onClick={() => {}}
+          onClick={() => setDrawerOpen(true)}
           className="text-indigo-500 cursor-pointer hover:text-indigo-600 transition"
         />
       </div>
