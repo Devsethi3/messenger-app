@@ -9,6 +9,7 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Select from "../Select";
+import { Button } from "../ui/button";
 
 interface GroupChatModalProps {
   isOpen?: boolean;
@@ -79,12 +80,12 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                 />
                 <Select
                   disabled={isLoading}
-                  label={members}
+                  label="Members"
                   options={users.map((user) => ({
                     value: user.id,
                     label: user.name,
                   }))}
-                  onChnage={(value) =>
+                  onChange={(value) =>
                     setValue("members", value, {
                       shouldValidate: true,
                     })
@@ -93,6 +94,19 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                 />
               </div>
             </div>
+          </div>
+          <div className="mt-6 flex items-center justify-end gap-x-6">
+            <Button
+              disabled={isLoading}
+              onClick={onClose}
+              type="button"
+              variant="secondary"
+            >
+              Cancel
+            </Button>
+            <Button disabled={isLoading} type="submit">
+              Create
+            </Button>
           </div>
         </form>
       </Modal>

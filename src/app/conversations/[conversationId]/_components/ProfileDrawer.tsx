@@ -8,7 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Avatar from "@/components/Avatar";
 import ConfirmModal from "./ConfirmModal";
-
+import AvatarGroup from "@/components/AvatarGroup";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -43,7 +43,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
   return (
     <>
-      <ConfirmModal isOpen={confirmOpen} onClose={() => setConfirmOpen(false)} />
+      <ConfirmModal
+        isOpen={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+      />
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={onClose}>
           <Transition.Child
@@ -89,12 +92,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         <div className="flex flex-col items-center">
                           <div className="mb-2">
-                            <Avatar user={otherUser} />
-                            {/* {data.isGroup ? (
+                            {data.isGroup ? (
                               <AvatarGroup users={data.users} />
                             ) : (
                               <Avatar user={otherUser} />
-                            )} */}
+                            )}
                           </div>
                           <div>{title}</div>
                           <div className="text-sm text-gray-500">

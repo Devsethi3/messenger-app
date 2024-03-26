@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import ToasterContext from "@/context/ToasterContex";
 import AuthContext from "@/context/AuthContext";
-import NextTopLoader from 'nextjs-toploader'
+import NextTopLoader from "nextjs-toploader";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={dmSans.className}>
-      <NextTopLoader color="#6366F1" crawlSpeed={200}
-            height={4}
-            crawl={true}
-            easing="ease" />
+      <body className={poppins.className}>
+        <NextTopLoader
+          color="#6366F1"
+          crawlSpeed={200}
+          height={4}
+          crawl={true}
+          easing="ease"
+        />
         <AuthContext>
           <ToasterContext />
           {children}
