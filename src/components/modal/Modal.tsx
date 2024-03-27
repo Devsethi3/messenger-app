@@ -3,6 +3,7 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
+import { Button } from "../ui/button";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -27,8 +28,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             className="
               fixed 
               inset-0 
-              bg-gray-500 
-              bg-opacity-75 
+              bg-black 
+              bg-opacity-60 
               transition-opacity
             "
           />
@@ -61,7 +62,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                   transform 
                   overflow-hidden 
                   rounded-lg 
-                  bg-white 
+                  bg-white
+                  dark:bg-[#030712] 
                   px-4 
                   pb-4
                   pt-5 
@@ -87,23 +89,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     z-10
                   "
                 >
-                  <button
+                  <Button
+                  size="icon"
                     type="button"
-                    className="
-                      rounded-md 
-                      bg-white 
-                      text-gray-400 
-                      hover:text-gray-500 
-                      focus:outline-none 
-                      focus:ring-2 
-                      focus:ring-indigo-500 
-                      focus:ring-offset-2
-                    "
+                    variant="outline"
+                    className="rounded-full"
                     onClick={onClose}
                   >
                     <span className="sr-only">Close</span>
-                    <IoClose className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                    <IoClose className="h-5 w-5 opacity-80" aria-hidden="true" />
+                  </Button>
                 </div>
                 {children}
               </Dialog.Panel>

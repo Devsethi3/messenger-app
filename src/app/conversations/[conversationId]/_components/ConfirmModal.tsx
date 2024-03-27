@@ -69,7 +69,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose }) => {
         >
           <Dialog.Title
             as="h3"
-            className="text-base font-semibold leading-6 text-gray-900"
+            className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
           >
             Delete conversation
           </Dialog.Title>

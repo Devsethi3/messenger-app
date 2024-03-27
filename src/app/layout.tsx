@@ -5,6 +5,7 @@ import ToasterContext from "@/context/ToasterContex";
 import AuthContext from "@/context/AuthContext";
 import NextTopLoader from "nextjs-toploader";
 import ActiveStatus from "@/components/ActiveStatus";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -28,16 +29,23 @@ export default function RootLayout({
       </head>
       <body className={lexend.className}>
         <NextTopLoader
-          color="#6366F1"
+          color="#7C3AED"
           crawlSpeed={200}
           height={4}
           crawl={true}
           easing="ease"
         />
         <AuthContext>
-          <ToasterContext />
-          <ActiveStatus />
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ToasterContext />
+            <ActiveStatus />
+            {children}
+          </ThemeProvider>
         </AuthContext>
       </body>
     </html>

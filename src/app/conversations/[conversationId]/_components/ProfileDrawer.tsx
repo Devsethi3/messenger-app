@@ -5,11 +5,13 @@ import { Conversation, User } from "@prisma/client";
 import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { IoClose, IoTrash } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import Avatar from "@/components/Avatar";
 import ConfirmModal from "./ConfirmModal";
 import AvatarGroup from "@/components/AvatarGroup";
 import useActiveList from "@/hooks/useActiveList";
+import { Button } from "@/components/ui/button";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -44,7 +46,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     }
 
     // return isActive ? "Active" : "Offline";
-  }, [data,isActive]);
+  }, [data, isActive]);
 
   return (
     <>
@@ -56,10 +58,10 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
         <Dialog as="div" className="relative z-50" onClose={onClose}>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-200"
+            enter="ease-out duration-100"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="ease-in duration-200"
+            leave="ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
@@ -79,18 +81,20 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                    <div className="flex h-full flex-col overflow-y-scroll bg-white dark:bg-[#030712] py-6 shadow-xl">
                       <div className="px-4 sm:px-6">
                         <div className="flex items-start justify-end">
                           <div className="ml-3 flex h-7 items-center">
-                            <button
+                            <Button
+                              variant="outline"
+                              size="icon"
                               type="button"
-                              className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                              className="rounded-full"
                               onClick={onClose}
                             >
                               <span className="sr-only">Close panel</span>
-                              <IoClose size={24} aria-hidden="true" />
-                            </button>
+                              <IoClose size={20} aria-hidden="true" />
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -103,8 +107,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                               <Avatar user={otherUser} />
                             )}
                           </div>
-                          <div>{title}</div>
-                          <div className="text-sm text-gray-500">
+                          <h4 className="text-lg">{title}</h4>
+                          <div className="text-sm text-gray-400">
                             {statusText}
                           </div>
                           <div className="flex gap-10 my-8">
@@ -112,10 +116,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                               onClick={() => setConfirmOpen(true)}
                               className="flex flex-col gap-3 items-center cursor-pointer hover:opacity-75"
                             >
-                              <div className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center">
-                                <IoTrash size={20} />
-                              </div>
-                              <div className="text-sm font-light text-neutral-600">
+                              <Button
+                                variant="secondary"
+                                size="icon"
+                                className="rounded-full"
+                              >
+                                <RiDeleteBin5Line />
+                              </Button>
+                              <div className="text-sm font-light text-neutral-600 dark:text-neutral-400">
                                 Delete
                               </div>
                             </div>
@@ -129,6 +137,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                   text-sm 
                                   font-medium 
                                   text-gray-500 
+                                  dark:text-gray-300
                                   sm:w-40 
                                   sm:flex-shrink-0
                                 "
@@ -140,6 +149,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                   mt-1 
                                   text-sm 
                                   text-gray-900 
+                                  dark:text-gray-400
                                   sm:col-span-2
                                 "
                                   >
@@ -155,7 +165,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                     className="
                                   text-sm 
                                   font-medium 
-                                  text-gray-500 
+                                  text-gray-500
+                                  dark:text-gray-200
                                   sm:w-40 
                                   sm:flex-shrink-0
                                 "
@@ -167,6 +178,9 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                   mt-1 
                                   text-sm 
                                   text-gray-900 
+                                  dark:text-gray-300 
+
+
                                   sm:col-span-2
                                 "
                                   >
@@ -183,6 +197,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                     text-sm 
                                     font-medium 
                                     text-gray-500 
+                                    dark:text-gray-200 
                                     sm:w-40 
                                     sm:flex-shrink-0
                                   "
@@ -194,6 +209,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                     mt-1 
                                     text-sm 
                                     text-gray-900 
+                                    dark:text-gray-300
                                     sm:col-span-2
                                   "
                                     >

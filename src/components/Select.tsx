@@ -26,6 +26,7 @@ const Select: React.FC<SelectProps> = ({
           font-medium 
           leading-6 
           text-gray-900
+          dark:text-gray-300
         "
       >
         {label}
@@ -33,7 +34,7 @@ const Select: React.FC<SelectProps> = ({
       <div className="mt-2">
         <ReactSelect
           isDisabled={disabled}
-          value={value} // Ensure value is an array of objects
+          value={value}
           onChange={onChange}
           isMulti
           options={options}

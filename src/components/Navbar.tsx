@@ -6,7 +6,9 @@ import { HiMenu } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import ThemeSwitcher from "./ThemeSwitcher";
+import { TbLogout } from "react-icons/tb";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,23 +40,34 @@ const Navbar = () => {
                     <Link href="/">Home</Link>
                   </li>
                   <li>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href="/conversations">Convesations</Link>
                   </li>
                   <li>
-                    <Link href="/">Pricing</Link>
+                    <Link href="/users">Other Users</Link>
                   </li>
                 </ul>
               </nav>
             </div>
+            <ThemeSwitcher />
             <div className="flex items-center gap-4">
               {session ? (
-                <Image
-                  src={session.user?.image || "/images/placeholder.jpg"}
-                  alt="user"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
+                <div className="flex items-center gap-5">
+                  <Image
+                    src={session.user?.image || "/images/placeholder.jpg"}
+                    alt="user"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                  <Button
+                    onClick={() => signOut()}
+                    variant="secondary"
+                    className="flex items-center gap-2"
+                  >
+                    Logout
+                    <TbLogout />
+                  </Button>
+                </div>
               ) : (
                 <Button onClick={() => router.push("/login")}>Login</Button>
               )}

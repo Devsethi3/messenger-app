@@ -74,24 +74,35 @@ const AuthForm = () => {
     }
   };
 
-  const socialAction = (action: string) => {
+  const handleSignInWithGithub = async () => {
     setIsLoading(true);
-
-    signIn(action, { redirect: false })
-      .then((callback) => {
-        if (callback?.error) {
-          toast.error("Invalid Credentials");
-        }
-        if (callback?.ok && !callback?.error) {
-          toast.success("Logged in Successfully!");
-        }
-      })
-      .finally(() => setIsLoading(false));
+    await signIn("github", { callbackUrl: "/users" });
   };
 
+  const handleSignInWithGoogle = async () => {
+    setIsLoading(true);
+    await signIn("google", { callbackUrl: "/users" });
+  };
+
+  // const socialAction = (action: string) => {
+  //   setIsLoading(true);
+
+  //   signIn(action, { redirect: false })
+  //     .then((callback) => {
+  //       if (callback?.error) {
+  //         toast.error("Invalid Credentials");
+  //       }
+  //       if (callback?.ok && !callback?.error) {
+  //         toast.success("Logged in Successfully!");
+  //         router.push("/users");
+  //       }
+  //     })
+  //     .finally(() => setIsLoading(false));
+  // };
+
   return (
-    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white px-4 py-8 shadow-md sm:rounded-lg sm:px-10">
+    <div className="mt-4 mx-2 w-[330px] md:w-[400px] lg:w-[450px]">
+      <div className="bg-white dark:bg-[#030712] p-8 shadow-md rounded-md">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {variant === "REGISTER" && (
             <FormInput
@@ -146,10 +157,10 @@ const AuthForm = () => {
                 items-center
               "
             >
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-300 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">
+              <span className="bg-white dark:bg-[#030712] px-2 text-gray-500">
                 Or continue with
               </span>
             </div>
@@ -158,16 +169,17 @@ const AuthForm = () => {
           <div className="mt-6 flex gap-2">
             <AuthSocialButton
               icon={BsGithub}
-              onClick={() => socialAction("github")}
+              onClick={handleSignInWithGithub}
             />
             <AuthSocialButton
               icon={BsGoogle}
-              onClick={() => socialAction("google")}
+              onClick={handleSignInWithGoogle}
             />
           </div>
         </div>
         <div
           className="
+          whitespace-nowrap
             flex 
             gap-2 
             justify-center 
@@ -175,11 +187,12 @@ const AuthForm = () => {
             mt-6 
             px-2 
             text-gray-500
+            dark:text-gray-400
           "
         >
           <div>
             {variant === "LOGIN"
-              ? "New to Messenger?"
+              ? "New to NexChat?"
               : "Already have an account?"}
           </div>
           <div onClick={toggleVariant} className="underline cursor-pointer">

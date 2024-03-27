@@ -7,6 +7,7 @@ import { HiPhoto } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
 import { BiSend } from "react-icons/bi";
 import { CldUploadButton } from "next-cloudinary";
+import { Button } from "@/components/ui/button";
 
 const Form = () => {
   const { conversationId } = useConversation();
@@ -38,13 +39,13 @@ const Form = () => {
   };
 
   return (
-    <div className="py-4 px-4 bg-white border-t flex items-center gap-2 lg:gap-4 w-full">
+    <div className="py-4 px-4 dark:bg-[] border-t flex items-center gap-2 lg:gap-4 w-full">
       <CldUploadButton
         options={{ maxFiles: 1 }}
         onUpload={handleUpload}
         uploadPreset="zt6ojhlz"
       >
-        <HiPhoto size={30} className="text-indigo-500" />
+        <HiPhoto size={30} className="text-primary" />
       </CldUploadButton>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -56,13 +57,10 @@ const Form = () => {
           errors={errors}
           placeholder="Write a message..."
         />
-        <button
-          type="submit"
-          className="rounded-md flex items-center gap-2 text-white cursor-pointer bg-indigo-600 hover:bg-indigo-700 transition py-2.5 px-5"
-        >
+        <Button type="submit" className="flex items-center gap-2">
           Send
           <BiSend />
-        </button>
+        </Button>
       </form>
     </div>
   );

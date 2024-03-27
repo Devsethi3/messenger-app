@@ -32,7 +32,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, isLast }) => {
 
   const message = clsx(
     "text-sm w-fit overflow-hidden",
-    isOwn ? "bg-indigo-500 text-white" : "bg-gray-100",
+    isOwn ? "bg-primary text-white/90" : "bg-gray-100 dark:bg-secondary opacity-85",
     data.image ? "rounded-md p-0" : "rounded-b-lg rounded-tl-lg py-2 px-3"
   );
 
@@ -44,13 +44,19 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, isLast }) => {
         </div>
         <div className={body}>
           <div className="flex items-center gap-1">
-            <div className="text-sm text-gray-500">{data.sender.name}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-300">
+              {data.sender.name}
+            </div>
             <div className="text-xs text-gray-400">
               {format(new Date(data.createdAt), "p")}
             </div>
           </div>
           <div className={message}>
-            <ImageModal src={data.image} isOpen={ImageModalOpen} onClose={() => setImageModalOpen(false)} />
+            <ImageModal
+              src={data.image}
+              isOpen={ImageModalOpen}
+              onClose={() => setImageModalOpen(false)}
+            />
             {data.image ? (
               <Image
                 onClick={() => setImageModalOpen(true)}

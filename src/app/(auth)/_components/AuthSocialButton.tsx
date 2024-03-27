@@ -17,13 +17,13 @@ const AuthSocialButton = ({ icon: Icon, onClick }: AuthSocialButtonProps) => {
         justify-center 
         rounded-md 
         bg-white 
+        dark:bg-secondary/20
         px-4 
         py-2 
         text-gray-500 
+        dark:text-gray-300
         shadow-sm 
-        ring-1 
-        ring-inset 
-        ring-gray-300 
+        border-[3px]
         hover:bg-gray-50 
         focus:outline-offset-0
       "
