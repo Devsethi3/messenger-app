@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Lexend } from "next/font/google";
 import "./globals.css";
 import ToasterContext from "@/context/ToasterContex";
 import AuthContext from "@/context/AuthContext";
 import NextTopLoader from "nextjs-toploader";
 import ActiveStatus from "@/components/ActiveStatus";
 
-const poppins = Poppins({
+const lexend = Lexend({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <head>
+        <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
+      </head>
+      <body className={lexend.className}>
         <NextTopLoader
           color="#6366F1"
           crawlSpeed={200}
