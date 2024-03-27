@@ -62,9 +62,8 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           </div>
         </div>
         <RiMenuFoldFill
-          size={25}
           onClick={() => setDrawerOpen(true)}
-          className="text-primary cursor-pointer hover:text-primary transition"
+          className="text-primary text-[2.5rem] cursor-pointer p-2.5 bg-secondary/30 hover:bg-secondary rounded-full hover:text-primary transition"
         />
       </div>
     </>

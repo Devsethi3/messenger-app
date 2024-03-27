@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between container">
             <Link href="/" className="flex items-center gap-3">
               <Image src="/images/logo.png" width={35} height={35} alt="logo" />
-              <h1 className="text-2xl lg:text-3xl font-bold">NexChat</h1>
+              <h1 className="text-2xl lg:text-3xl hidden md:block font-bold">NexChat</h1>
             </Link>
 
             <div
