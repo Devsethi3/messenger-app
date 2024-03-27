@@ -4,6 +4,7 @@ import "./globals.css";
 import ToasterContext from "@/context/ToasterContex";
 import AuthContext from "@/context/AuthContext";
 import NextTopLoader from "nextjs-toploader";
+import ActiveStatus from "@/components/ActiveStatus";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         />
         <AuthContext>
           <ToasterContext />
+          <ActiveStatus />
           {children}
         </AuthContext>
       </body>
