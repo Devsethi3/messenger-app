@@ -19,7 +19,7 @@ const useConversation = () => {
       isOpen,
       conversationId,
     }),
-    [isOpen, conversationId]
+    [isOpen]
   );
 };
 

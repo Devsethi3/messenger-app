@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
     }
 
     // return isActive ? "Active" : "Offline";
-  }, [conversation, isActive]);
+  }, [conversation]);
 
   return (
     <>
