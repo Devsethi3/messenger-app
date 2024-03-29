@@ -12,14 +12,17 @@ const useConversation = () => {
     return params.conversationId as string;
   }, [params?.conversationId]);
 
-  const isOpen = useMemo(() => !!conversationId, []);
+  const isOpen = useMemo(
+    () => !!params?.conversationId,
+    [params?.conversationId]
+  );
 
   return useMemo(
     () => ({
       isOpen,
       conversationId,
     }),
-    [isOpen]
+    [isOpen, conversationId] // Include conversationId as a dependency here
   );
 };
 
