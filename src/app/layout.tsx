@@ -6,6 +6,7 @@ import AuthContext from "@/context/AuthContext";
 import NextTopLoader from "nextjs-toploader";
 import ActiveStatus from "@/components/ActiveStatus";
 import { ThemeProvider } from "@/providers/theme-provider";
+import NextAuthProvider from "@/providers/NextAuthProvider";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -23,19 +24,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
-      </head>
-      <body className={lexend.className}>
-        <NextTopLoader
-          color="#7C3AED"
-          crawlSpeed={200}
-          height={4}
-          crawl={true}
-          easing="ease"
-        />
-        <AuthContext>
+    <NextAuthProvider>
+      <html lang="en">
+        <head>
+          <link
+            rel="shortcut icon"
+            href="/images/logo.png"
+            type="image/x-icon"
+          />
+        </head>
+        <body className={lexend.className}>
+          <NextTopLoader
+            color="#7C3AED"
+            crawlSpeed={200}
+            height={4}
+            crawl={true}
+            easing="ease"
+          />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -46,8 +51,8 @@ export default function RootLayout({
             <ActiveStatus />
             {children}
           </ThemeProvider>
-        </AuthContext>
-      </body>
-    </html>
+        </body>
+      </html>
+    </NextAuthProvider>
   );
 }
