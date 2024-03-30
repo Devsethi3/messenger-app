@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useEffect } from "react";
 
 const HomePage = () => {
   useGSAP(() => {
@@ -14,12 +15,31 @@ const HomePage = () => {
       stagger: 0.1,
     });
   }, []);
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      const cursor = document.querySelector(".cursor");
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.8,
+        ease: "power2.inOut",
+      });
+    };
+
+    document.addEventListener("mousemove", moveCursor);
+
+    return () => {
+      document.removeEventListener("mousemove", moveCursor);
+    };
+  }, []);
 
   return (
     <>
       <Navbar />
-      <div className="">
-        <div className="bg-[url(/images/nnnoise.svg)] h-full">
+      {/* <div className="w-48 h-48 bg-white rounded-full absolute opacity-20 mix-blend-difference transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div> */}
+
+      <div className="overflow-hidden z-[100]">
+        <div className="h-full">
           <div className="flex flex-col container items-center justify-center h-[90vh]">
             <div className="mx-auto text-center">
               <h1 className="font-semibold text-4xl sm:text-4xl lg:text-7xl">
