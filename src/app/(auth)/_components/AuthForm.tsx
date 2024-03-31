@@ -1,12 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import {
-  FieldValues,
-  FieldErrors,
-  useForm,
-  SubmitHandler,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import FormInput from "./FormInput";
 import FormButton from "./FormButton";
 import AuthSocialButton from "./AuthSocialButton";
@@ -48,26 +42,43 @@ const AuthForm = () => {
     },
   });
 
-  // Specify the type for onSubmit
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
-        .then(() => signIn("credentials", data))
+        .then(() =>
+          signIn("credentials", {
+            ...data,
+            redirect: false,
+          })
+        )
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid credentials!");
+          }
+
+          if (callback?.ok) {
+            router.push("/conversations");
+          }
+        })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
     }
+
     if (variant === "LOGIN") {
-      signIn("credentials", { ...data, redirect: false })
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
         .then((callback) => {
           if (callback?.error) {
-            toast.error("Invalid Credentials");
+            toast.error("Invalid credentials!");
           }
-          if (callback?.ok && !callback?.error) {
-            toast.success("Logged in Successfully!");
-            router.push("/users");
+
+          if (callback?.ok) {
+            router.push("/conversations");
           }
         })
         .finally(() => setIsLoading(false));

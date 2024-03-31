@@ -1,22 +1,23 @@
-import type { NextAuthOptions } from "next-auth";
+import bcrypt from "bcrypt";
+import NextAuth, { AuthOptions, NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { getServerSession as memoGetServerSession } from "next-auth";
 import { cache } from "react";
 import prisma from "@/lib/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import bcrypt from "bcrypt";
 
 interface User {
   name?: string | null | undefined;
   email?: string | null | undefined;
   image?: string | null | undefined;
-  role?: string; // Define the role property
+  role?: string;
 }
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
+  adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -60,6 +61,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  debug: process.env.NODE_ENV === "development",
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
@@ -74,11 +77,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-  },
-  adapter: PrismaAdapter(prisma),
-  secret: process.env.NEXTAUTH_SECRET ?? "",
-  pages: {
-    signIn: "/login",
   },
 };
 

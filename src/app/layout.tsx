@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import ToasterContext from "@/context/ToasterContex";
-import AuthContext from "@/context/AuthContext";
 import NextTopLoader from "nextjs-toploader";
 import ActiveStatus from "@/components/ActiveStatus";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -24,16 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <NextAuthProvider>
-      <html lang="en">
-        <head>
-          <link
-            rel="shortcut icon"
-            href="/images/logo.png"
-            type="image/x-icon"
-          />
-        </head>
-        <body className={lexend.className}>
+    <html lang="en">
+      <head>
+        <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
+      </head>
+      <body className={lexend.className}>
+        <NextAuthProvider>
           <NextTopLoader
             color="#7C3AED"
             crawlSpeed={200}
@@ -51,8 +46,8 @@ export default function RootLayout({
             <ActiveStatus />
             {children}
           </ThemeProvider>
-        </body>
-      </html>
-    </NextAuthProvider>
+        </NextAuthProvider>
+      </body>
+    </html>
   );
 }
