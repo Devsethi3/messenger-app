@@ -16,19 +16,21 @@ const AuthForm = () => {
   const session = useSession();
   const router = useRouter();
   const [variant, setVariant] = useState<Variant>("LOGIN");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
-      console.log("Authenticated");
+      router.push("/users");
     }
   }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
-    setVariant((prevVariant) =>
-      prevVariant === "LOGIN" ? "REGISTER" : "LOGIN"
-    );
-  }, []);
+    if (variant === "LOGIN") {
+      setVariant("REGISTER");
+    } else {
+      setVariant("LOGIN");
+    }
+  }, [variant]);
 
   const {
     register,
@@ -60,7 +62,9 @@ const AuthForm = () => {
           }
 
           if (callback?.ok) {
-            router.push("/conversations");
+            toast.success("Logged In Successfully!");
+
+            router.push("/users");
           }
         })
         .catch(() => toast.error("Something went wrong!"))
@@ -78,38 +82,30 @@ const AuthForm = () => {
           }
 
           if (callback?.ok) {
-            router.push("/conversations");
+            toast.success("Logged In Successfully!");
+
+            router.push("/users");
           }
         })
         .finally(() => setIsLoading(false));
     }
   };
 
-  const handleSignInWithGithub = async () => {
+  const socialAction = (action: string) => {
     setIsLoading(true);
-    await signIn("github", { callbackUrl: "/users" });
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid credentials!");
+        }
+
+        if (callback?.ok) {
+          router.push("/users");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
-
-  const handleSignInWithGoogle = async () => {
-    setIsLoading(true);
-    await signIn("google", { callbackUrl: "/users" });
-  };
-
-  // const socialAction = (action: string) => {
-  //   setIsLoading(true);
-
-  //   signIn(action, { redirect: false })
-  //     .then((callback) => {
-  //       if (callback?.error) {
-  //         toast.error("Invalid Credentials");
-  //       }
-  //       if (callback?.ok && !callback?.error) {
-  //         toast.success("Logged in Successfully!");
-  //         router.push("/users");
-  //       }
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // };
 
   return (
     <div className="mt-4 mx-2 w-[330px] md:w-[400px] lg:w-[450px]">
@@ -177,16 +173,16 @@ const AuthForm = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex gap-2">
+          {/* <div className="mt-6 flex gap-2">
             <AuthSocialButton
               icon={BsGithub}
-              onClick={handleSignInWithGithub}
+              onClick={() => socialAction("github")}
             />
             <AuthSocialButton
               icon={BsGoogle}
-              onClick={handleSignInWithGoogle}
+              onClick={() => socialAction("google")}
             />
-          </div>
+          </div> */}
         </div>
         <div
           className="
