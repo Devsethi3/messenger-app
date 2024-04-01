@@ -146,8 +146,8 @@ const AuthForm = () => {
           <div>
             <FormButton
               type="submit"
-              fullWidth={true} // Example of how you can pass fullWidth prop
-              disabled={isLoading} // Example of how you can pass disabled prop
+              fullWidth={true} 
+              disabled={isLoading}
             >
               {variant === "LOGIN" ? "Login" : "Register"}
             </FormButton>
