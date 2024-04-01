@@ -118,9 +118,9 @@ const AuthForm = () => {
               label="Name"
               register={register}
               placeholder="Display Name"
-              type="name" // Adding type
-              required // Adding required
-              disabled={isLoading} // Example of how you can pass disabled prop
+              type="name" 
+              required 
+              disabled={isLoading}
             />
           )}
           <FormInput
@@ -129,9 +129,9 @@ const AuthForm = () => {
             label="Email"
             placeholder="abc@gmail.com"
             register={register}
-            type="email" // Adding type
-            required // Adding required
-            disabled={isLoading} // Example of how you can pass disabled prop
+            type="email" 
+            required 
+            disabled={isLoading}
           />
           <FormInput
             errors={errors}
@@ -139,8 +139,8 @@ const AuthForm = () => {
             label="Passoword"
             placeholder="Enter Your Password"
             register={register}
-            type="password" // Adding type
-            required // Adding required
+            type="password" 
+            required 
             disabled={isLoading} // Example of how you can pass disabled prop
           />
           <div>
