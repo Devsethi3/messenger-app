@@ -141,7 +141,7 @@ const AuthForm = () => {
             register={register}
             type="password" 
             required 
-            disabled={isLoading} // Example of how you can pass disabled prop
+            disabled={isLoading}
           />
           <div>
             <FormButton
