@@ -129,7 +129,7 @@
   }
 }
 
-/* =========================== MEDIA QUERRIES ============================ */
+/* =========================== MEDIA QUERRIES =========================== */
 @media screen and (max-width: 768px) {
   .nav-menu {
     display: none;
