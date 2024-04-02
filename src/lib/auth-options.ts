@@ -72,7 +72,7 @@ export const authOptions: NextAuthOptions = {
         session.user = {
           ...(session.user ?? {}),
           role: token.role,
-        } as User; // Ensure session.user is typed as User
+        } as User;
         console.log(session.user);
       }
       return session;
